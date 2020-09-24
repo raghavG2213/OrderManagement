@@ -15,4 +15,9 @@ class ProductController(private val pServ:ProductService) {
     fun getProductByQty(@PathVariable(value = "id") id:Int,@PathVariable(value = "quantity") qty:Int): ResponseEntity<String>  {
         return ResponseEntity.ok().body(pServ.getProdByQty(id,qty))
     }
+
+    @GetMapping("/totalPrice/{id}/{quantity}")
+    fun getTotalPrice(@PathVariable(value = "id") id:Int,@PathVariable(value = "quantity") qty:Int): ResponseEntity<String>  {
+        return ResponseEntity.ok().body(pServ.getTotalPrice(id,qty))
+    }
 }
