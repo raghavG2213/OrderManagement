@@ -7,12 +7,12 @@ import javax.validation.constraints.NotNull
 
 @Entity
 @Table(name = "TRANSPORT", schema="ahold")
-@NamedQuery(name = "Transport.fetchByOrderId", query = "SELECT e FROM Transport e WHERE e.ORDER_ID =:orderId")
 data class Transport (
         @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
         var ID: Int = 0,
-        @NotNull
-        var ORDER_ID: Int = 0,
+        @OneToOne(cascade= [CascadeType.ALL])
+        @JoinColumn(name = "ORDER_ID")
+        var order:OrderDetails,
         @NotNull
         var STAGE_ID: Int = 0,
         @get: NotBlank

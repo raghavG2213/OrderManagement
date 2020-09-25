@@ -8,9 +8,9 @@ import javax.validation.Valid
 @RestController
 @RequestMapping("/api")
 class PriceController(private val pPServ:ProductPriceService) {
-    @PostMapping("/price")
+    @PostMapping("/Product")
     fun createNewProduct(@Valid @RequestBody prod: ProductPrice):ResponseEntity<String> {
         pPServ.addProductPrice(prod)
-        return ResponseEntity.ok().body("Price Added Successfully")
+        return ResponseEntity.ok().body("Product Added Successfully")
     }
 }

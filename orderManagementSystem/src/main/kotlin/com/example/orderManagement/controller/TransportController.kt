@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/api")
 class TransportController(private val tServ: TransportService) {
 
-    @GetMapping("/transport/{orderId}/")
+    @GetMapping("/transport/{orderId}")
     fun fetchByOrderId(@PathVariable(value = "orderId") orderId: Int): ResponseEntity<String> {
         return ResponseEntity.ok().body(tServ.getTransportByOrderId(orderId))
     }

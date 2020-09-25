@@ -5,7 +5,7 @@ import com.example.orderManagement.product.ProductPrice
 import org.springframework.stereotype.Service
 
 @Service
-class ProductPriceService(private val pDao:ProductPriceDao)
+class ProductPriceService(private val pPDao:ProductPriceDao)
 {
-    fun addProductPrice(prod: ProductPrice) = pDao.addProdPrice(prod)
+    fun addProductPrice(prod: ProductPrice) = pPDao.addProdPrice(prod)
 }

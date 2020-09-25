@@ -8,8 +8,12 @@ class ProductDao(private val pRep:ProductRepository){
 
     fun createNewProduct(prod: Product) = pRep.save(prod)
 
-    fun getProdByQty(id:Int):Product{
+    fun getProdById(id:Int):Product{
         return pRep.findById(id).orElse(null)
+    }
+
+    fun updateQuantity(id: Int, updatedQty: Int) {
+        pRep.updateQty(id,updatedQty)
     }
 }
 

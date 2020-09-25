@@ -11,25 +11,20 @@ import java.time.LocalDate
 @Service
 class OrderService(private val oDao: OrderDao, private val pDao: ProductDao, private val pPDao:ProductPriceDao, private val tDao:TransportDao)
 {
-    fun createNewOrder(id: Int,qty:Int):String {
-        val result = when {
-            pDao.getProdByQty(id) == null -> {
-                "Product with $id doesn't exist"
-            }
-            pDao.getProdByQty(id).QTY < qty -> {
-                "Product with $id doesn't has sufficient quantity"
-            }
-            pDao.getProdByQty(id).VALID_TO < java.sql.Date.valueOf(LocalDate.now())  -> {
-                "Product with $id is not valid"
-            }
-            else -> {
-                val totalPrice = qty * pPDao.getPriceByID(id)
+    fun createNewOrder(id: Int, qty:Int):String {
+        //var prodID = order.PRODUCT_ID
+        val result = ProductService.prodAvail(id,qty,pDao.getProdById(id))
+        return when(result){
+            "Product Available" ->{
+                val totalPrice = qty * pPDao.getPriceByID(pDao.getProdById(id)).AMOUNT
                 val order:OrderDetails = oDao.createNewOrder(OrderDetails(0,id,totalPrice))
-                tDao.createNewTransportRequest(Transport(0,order.ORDER_ID,0,"Order Placed",java.sql.Date.valueOf(LocalDate.now()),null))
+                tDao.createNewTransportRequest(Transport(0,order,0,"Order Placed",java.sql.Date.valueOf(LocalDate.now()),null))
+                pDao.updateQuantity(id,pDao.getProdById(id).QTY - qty)
                 order.toString()
             }
+            else -> result.toString()
         }
-        return result
+
     }
     fun getOrderByID(id:Int):String{
         val result = when {
