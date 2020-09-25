@@ -10,14 +10,13 @@ import javax.validation.constraints.NotNull
 data class Transport (
         @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
         var ID: Int = 0,
-        @OneToOne(cascade= [CascadeType.ALL])
-        @JoinColumn(name = "ORDER_ID")
-        var order:OrderDetails,
+        @NotNull
+        var orderId: Int,
         @NotNull
         var STAGE_ID: Int = 0,
         @get: NotBlank
         var STATUS: String = " ",
         @NotNull
         var START_TIME: Date = Date(),
-        var END_TIME_TIME: Date? = Date()
+        var END_TIME: Date? = Date()
         )

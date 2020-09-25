@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface TransportRepository : JpaRepository<Transport, Int>{
-    fun findByorder(order: OrderDetails?): Transport
+    fun findByorderId(orderId: Int): Transport
 }

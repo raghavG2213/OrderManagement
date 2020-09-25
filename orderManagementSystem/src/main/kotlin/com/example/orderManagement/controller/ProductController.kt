@@ -8,8 +8,6 @@ import javax.validation.Valid
 @RestController
 @RequestMapping("/api")
 class ProductController(private val pServ:ProductService) {
-    @PostMapping("/product")
-    fun createNewProduct(@Valid @RequestBody prod: Product) = pServ.createNewProduct(prod)
 
     @GetMapping("/product/{id}/{quantity}")
     fun getProductByQty(@PathVariable(value = "id") id:Int,@PathVariable(value = "quantity") qty:Int): ResponseEntity<String>  {

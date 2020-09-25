@@ -9,7 +9,7 @@ class TransportService(private val tDao:TransportDao, private val oDao: OrderDao
 {
     fun getTransportByOrderId(id: Int):String {
 
-        val response = tDao.getTransportByOrderId(oDao.getOrderById(id))
+        val response = tDao.getTransportByOrderId(oDao.getOrderById(id)?: 0)
         return response.toString()
     }
 }

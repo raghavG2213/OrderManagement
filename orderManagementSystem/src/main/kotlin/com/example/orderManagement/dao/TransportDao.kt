@@ -10,6 +10,6 @@ class TransportDao(private val tRep:TransportRepository){
     fun createNewTransportRequest(trans: Transport) {
         tRep.save(trans)
     }
-    fun getTransportByOrderId(order: OrderDetails?) = tRep.findByorder(order)
+    fun getTransportByOrderId(orderId: Int) = tRep.findByorderId(orderId)
 
 }

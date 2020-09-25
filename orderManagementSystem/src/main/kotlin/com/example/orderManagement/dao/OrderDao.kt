@@ -9,7 +9,7 @@ class OrderDao(private val oRep:OrderRepository){
     fun createNewOrder(ord: OrderDetails):OrderDetails {
         return oRep.save(ord)
     }
-    fun getOrderById(id:Int):OrderDetails?{
-       return oRep.findByIdOrNull(id)
+    fun getOrderById(id:Int):Int?{
+       return oRep.findByIdOrNull(id)?.ORDER_ID
     }
 }
